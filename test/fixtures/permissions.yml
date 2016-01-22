@@ -1,0 +1,52 @@
+# guest permissions
+view_public_pages:
+  name: view public pages
+  tasks: root, about, user_doc, developer_doc
+
+create_account:
+  name: create account
+  tasks: signup_form, create_user
+
+login:
+  name: login
+  tasks: login_form, create_session
+
+# participant permissions
+view_dashboard:
+  name: view_dashboard
+  tasks: show_user
+
+view_event:
+  name: view event
+  tasks: show_event
+
+join_event:
+  name: join event
+  tasks: join_event
+
+visit_location:
+  name: visit location
+  tasks: visit_location
+
+leave_event:
+  name: leave event
+  tasks: leave_event
+
+edit_account:
+  name: edit account
+  tasks: edit_user_form, update_user
+
+logout:
+  name: logout
+  tasks: update_session
+
+# owner permissions
+manage_event:
+  name: manage event
+  tasks: new_event_form, create_event, show_event, edit_event_form, update_event, delete_event
+
+manage_location:
+  name: manage location
+  tasks: new_location_form create_location, show_location, edit_location_form, update_location, delete_location
+
+# admin permissions

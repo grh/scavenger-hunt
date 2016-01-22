@@ -1,0 +1,45 @@
+$unlv: #880000;
+
+.navbar-default {
+  background-color: white;
+  border-style: none;
+  border-bottom: solid $unlv;
+}
+
+.school-logo {
+  color: $unlv;
+  font-size: 200%;
+}
+
+.navbar-default .navbar-collapse li a {
+  color: $unlv;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.dashboard-table {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.dashboard-actions {
+  color: $unlv;
+}
+
+.btn-unlv-red {
+  background-color: $unlv;
+  color: white;
+}
+
+a {
+  color: $unlv;
+}
+
+@media screen and (min-width: 768px) {
+  #main {
+    padding-top: 40px;
+  }
+}

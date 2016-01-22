@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QR Code Scavenger Hunt | <%= yield(:title) %></title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+
+  <body id="main">
+    <div class="container">
+      <%= render 'shared/nav' %>
+
+      <% flash.each do |name, msg| %>
+          <div class="col-md-9 col-centered alert alert-<%= name %> alert-dismissible text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= msg %>
+          </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+location1:
+  name: location 1
+  description: location 1
+  coordinates: 36.107148, -115.14226
+  tag: abc123
+  owner: owner

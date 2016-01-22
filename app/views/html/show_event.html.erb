@@ -1,0 +1,82 @@
+<%= provide(:title, @event.title) %>
+
+<div class="container">
+  <!-- Page title -->
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <h3>
+        <%= @event.title %>
+        <% if @current_user.owns? @event or @current_user.admin? %>
+            <small>(<%= link_to 'edit', edit_event_form_path(@event) %> | <%= link_to 'delete', delete_event_path(@event), data: { confirm: 'Are you sure?' } %>)</small>
+        <% end %>
+      </h3>
+    </div>
+  </div>
+
+  <% if @current_user.owns? @event %>
+      <div class="row">
+        <div class="col-md-9 col-centered">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Participant</th>
+                <th># visited</th>
+                <th># unvisited</th>
+                <th>% complete</th>
+              </thead>
+
+              <tbody>
+              <% @event.participants.each do |participant| %>
+                  <tr>
+                    <td><%= "#{participant.first_name} #{participant.last_name}" %></td>
+                    <td><%= participant.visited(@event).size %></td>
+                    <td><%= participant.unvisited(@event).size %></td>
+                    <td><%= participant.progress(@event) %>%</td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Location</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @event.locations.each do |location| %>
+              <tr>
+                <td><%= location.name %></td>
+                <td><%= location.description %></td>
+                <% unless @current_user.owns? @event %>
+                    <% if @current_user.visited_locations.include? location %>
+                        <td>&#x2714</td>
+                    <% else %>
+                        <td><%= link_to "map", "http://maps.google.com/?q=#{location.coordinates}", target: "_blank" %></td>
+                    <% end %>
+                <% else %>
+                    <td>
+                      <%= link_to 'view', show_location_path(location) %> |
+                      <%= link_to 'edit', edit_location_form_path(location) %> |
+                      <%= link_to 'delete', delete_location_path(location) %>
+                    </td>
+                <% end %>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

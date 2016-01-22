@@ -1,0 +1,22 @@
+# an event that ended two weeks ago
+event1:
+  title: event 1
+  description: event 1
+  start_date: <%= Date.today - 4.weeks %>
+  end_date: <%= Date.today - 2.weeks %>
+
+# an ongoing event
+event2:
+  title: event 2
+  description: event 2
+  start_date: <%= Date.today - 1 %>
+  end_date: <%= Date.today + 1 %>
+  locations: location1
+  owner: owner
+
+# an event that starts two weeks from now
+event3:
+  title: event 3
+  description: event 3
+  start_date: <%= Date.today + 2.weeks %>
+  end_date: <%= Date.today + 4.weeks %>

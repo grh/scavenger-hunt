@@ -1,0 +1,15 @@
+guest:
+  name: guest
+  permissions: view_public_pages, create_account, login
+
+participant:
+  name: participant
+  permissions: view_public_pages, view_dashboard, view_event, join_event, visit_location, leave_event, edit_account, logout
+
+owner:
+  name: owner
+  permissions: manage_event, manage_location
+
+admin:
+  name: admin
+  permissions:

@@ -1,0 +1,153 @@
+# Create tasks for all routes defined in config/routes.rb
+#<% routes = `rake routes`.split("\n") %>
+#<% routes.drop(1).each do |route| %>
+#<%= route.split[0] %>:
+#  controller: <%= route.split[3].split("#")[0] %>
+#  action: <%= route.split[3].split("#")[1] %>
+#  request_method: <%= route.split[1] %>
+#<% end %>
+
+# guest tasks
+root:
+  controller: html
+  action: home
+  request_method: GET
+
+about:
+  controller: html
+  action: about
+  request_method: GET
+
+user_doc:
+  controller: html
+  action: user_doc
+  request_method: GET
+
+developer_doc:
+  controller: html
+  action: developer_doc
+  request_method: GET
+
+signup_form:
+  controller: html
+  action: new_user_form
+  request_method: GET
+
+create_user:
+  controller: users
+  action: create_user
+  request_method: POST
+
+login_form:
+  controller: html
+  action: login_form
+  request_method: GET
+
+create_session:
+  controller: sessions
+  action: create_session
+  request_method: POST
+
+# participant tasks
+show_user:
+  controller: html
+  action: show_user
+  request_method: GET
+
+show_event:
+  controller: html
+  action: show_event
+  request_method: GET
+
+join_event:
+  controller: users
+  action: join_event
+  request_method: GET
+
+visit_location:
+  controller: users
+  action: visit_location
+  request_method: GET
+
+update_session:
+  controller: sessions
+  action: update_session
+  request_method: GET
+
+leave_event:
+  controller: users
+  action: leave_event
+  request_method: GET
+
+edit_user_form:
+  controller: html
+  action: edit_user_form
+  request_method: GET
+
+update_user:
+  controller: users
+  action: update_user
+  request_method: POST
+
+# owner tasks
+new_event_form:
+  controller: html
+  action: new_event_form
+  request_method: GET
+
+create_event:
+  controller: events
+  action: create_event
+  request_method: POST
+
+show_event:
+  controller: html
+  action: show_event
+  request_method: GET
+
+edit_event_form:
+  controller: html
+  action: edit_event_form
+  request_method: GET
+
+update_event:
+  controller: events
+  action: update_event
+  request_method: POST
+
+delete_event:
+  controller: events
+  action: delete_event
+  request_method: GET
+
+new_location_form:
+  controller: html
+  action: new_location_form
+  request_method: GET
+
+create_location:
+  controller: locations
+  action: create_location
+  request_method: POST
+
+show_location:
+  controller: html
+  action: show_location
+  request_method: GET
+
+edit_location_form:
+  controller: html
+  action: edit_location_form
+  request_method: GET
+
+update_location:
+  controller: locations
+  action: update_location
+  request_method: POST
+
+delete_location:
+  controller: locations
+  action: delete_location
+  request_method: GET
+
+# admin tasks

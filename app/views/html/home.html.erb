@@ -1,0 +1,51 @@
+<%= provide(:title, 'Home') %>
+
+<div class="container">
+  <!-- Page title -->
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <h3>Events</h3>
+    </div>
+  </div>
+
+  <!--- Events table -->
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <div class="table-responsive dashboard-table">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Event</th>
+            <th>Start</th>
+            <th>End</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if not @current_events.empty? %>
+              <% @current_events.each do |event| %>
+                  <tr>
+                    <td><%= event.title %></td>
+                    <td><%= event.start_date.strftime("%b %e, %Y") %></td>
+                    <td><%= event.end_date.strftime("%b %e, %Y") %></td>
+                    <td><%= link_to 'view', show_event_path(event) %> / <%= link_to 'join', join_event_path(event.id) %></td>
+                  </tr>
+              <% end %>
+          <% end %>
+
+          <% if not @upcoming_events.empty? %>
+              <% @upcoming_events.each do |event| %>
+                  <tr>
+                    <td><%= event.title %></td>
+                    <td><%= event.start_date.strftime("%b %e, %Y") %></td>
+                    <td><%= event.end_date.strftime("%b %e, %Y") %></td>
+                    <td></td>
+                  </tr>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

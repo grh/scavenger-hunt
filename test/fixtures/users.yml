@@ -1,0 +1,44 @@
+# Locally define helper methods so that
+# loading fixtures in development environment
+# doesn't generate a NoMethodError
+<%
+def password_hash
+  BCrypt::Engine.hash_secret(password, password_salt)
+end
+%>
+
+<%
+def password
+  return 'password'
+end
+%>
+
+<%
+def password_salt
+  return "$2a$10$this.is.my.passwd.salt"
+end
+%>
+
+guest:
+  first_name: guest
+  last_name: guest
+  email: g@g.com
+  roles: guest
+
+participant:
+  first_name: participant
+  last_name: participant
+  email: p@p.com
+  password_hash: <%= password_hash %>
+  password_salt: <%= password_salt %>
+  roles: participant
+
+owner:
+  first_name: owner
+  last_name: owner
+  email: o@o.com
+  password_hash: <%= password_hash %>
+  password_salt: <%= password_salt %>
+  roles: participant, owner
+  owned_events: event2
+  owned_locations: location1
