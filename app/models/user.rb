@@ -99,6 +99,11 @@ class User < ActiveRecord::Base
         break
       end
     end
+    new_user_form_task = Task.find_by(controller: 'html', action: 'new_user_form', request_method: 'GET')
+    if User.admins.empty?  and (current_task == new_user_form_task)
+      puts "#{User.admins.empty?} #{current_task} #{new_user_form_task}"
+      authorized = true
+    end
     return authorized
   end
 

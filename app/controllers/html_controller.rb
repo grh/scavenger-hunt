@@ -1,4 +1,6 @@
 class HtmlController < ApplicationController
+  
+  skip_before_action :install, only: :new_user_form
   ##################
   # PUBLIC ACTIONS #
   ##################

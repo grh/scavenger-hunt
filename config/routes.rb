@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   get '/docs/user', to: 'html#user_doc', as: :user_doc
   get '/docs/developer', to: 'html#developer_doc', as: :developer_doc
   get '/signup', to: 'html#new_user_form', as: :signup_form
-
+  get '/user/new_user', to: 'html#new_user_form', as: :new_user_form
+  
   # participant pages
   get '/login', to: 'html#login_form', as: :login_form
   get '/user/:id', to: 'html#show_user', as: :show_user
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
   get '/events', to: 'html#events', as: :events
   get '/locations', to: 'html#locations', as: :locations
   get '/users', to: 'html#users', as: :users
-  get '/user/new_user', to: 'html#new_user_form', as: :new_user_form
+
 
   ###############################################################
   # NORMAL ROUTES - NOTHING RENDERED; MODIFICATIONS MIGHT OCCUR #
