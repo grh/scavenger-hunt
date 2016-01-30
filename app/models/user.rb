@@ -127,7 +127,12 @@ class User < ActiveRecord::Base
   def create
     status = false
     if self.save
-      self.roles << Role.default
+      if User.admin.empty?
+        @user.roles << [Role.admin, Role.owner, Role.participant]
+      else
+        @user.roles << Role.default
+      end
+      #self.roles << Role.default  #this is replaced with admin conditional (above)
       status = true
     end
     return status
