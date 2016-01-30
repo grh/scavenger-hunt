@@ -151,3 +151,7 @@ delete_location:
   request_method: GET
 
 # admin tasks
+new_user_form:
+  controller: users
+  action: new_user_form
+  request_method: GET

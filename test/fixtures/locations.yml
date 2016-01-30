@@ -3,4 +3,13 @@ location1:
   description: location 1
   coordinates: 36.107148, -115.14226
   tag: abc123
+  events: event2
+  owner: owner
+
+location2:
+  name: location 2
+  description: location 2
+  coordinates: 36.107148, -115.14226
+  tag: def456
+  events: event2
   owner: owner

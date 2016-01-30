@@ -1,7 +1,6 @@
 <%= provide(:title, @event.title) %>
 
 <div class="container">
-  <!-- Page title -->
   <div class="row">
     <div class="col-md-9 col-centered">
       <h3>
@@ -10,6 +9,12 @@
             <small>(<%= link_to 'edit', edit_event_form_path(@event) %> | <%= link_to 'delete', delete_event_path(@event), data: { confirm: 'Are you sure?' } %>)</small>
         <% end %>
       </h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 col-centered description">
+      <p><%= @event.description %></p>
     </div>
   </div>
 
@@ -38,6 +43,12 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9 col-centered">
+          <hr>
         </div>
       </div>
   <% end %>

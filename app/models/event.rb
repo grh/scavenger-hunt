@@ -22,4 +22,46 @@ class Event < ActiveRecord::Base
   def self.upcoming
     where(start_date: (Date.today+1)..(Date.today+2.weeks)).order(start_date: :asc)
   end
+
+  # save?: saves a given event
+  # parameters: event_params
+  # return value: success or failure
+  def save?(locations, user)
+    saved = self.save ? true : false
+
+    # update owner info
+    self.owner << user
+
+    # update location info
+    Location.find(locations).each do |location|
+      unless self.locations.include? location
+        self.locations << location
+      end
+    end
+
+    return saved
+  end
+
+  # update?: updates a given event
+  # parameters: event_params
+  # return value: success or failure
+  def update?(event_params, locations)
+    saved = self.update(event_params) ? true : false
+
+    # delete existing locations from event
+    self.locations.each do |location|
+      unless Location.find(locations).include? location
+        self.locations.delete(location)
+      end
+    end
+
+    # add new locations to event
+    Location.find(locations).each do |location|
+      unless self.locations.include? location
+        self.locations << location
+      end
+    end
+
+    return saved
+  end
 end

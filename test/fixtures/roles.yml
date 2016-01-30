@@ -8,8 +8,8 @@ participant:
 
 owner:
   name: owner
-  permissions: manage_event, manage_location
+  permissions: manage_events, manage_locations
 
 admin:
   name: admin
-  permissions:
+  permissions: manage_users

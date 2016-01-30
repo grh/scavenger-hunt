@@ -2,25 +2,29 @@ class EventsController < ApplicationController
   def create_event
     @event = Event.new(event_params)
 
-    if @event.save!
-      @event.owner << @current_user
-
-      Location.find(params['add_locations']).each do |location|
-        unless @event.locations.include? location
-          @event.locations << location
-        end
-      end
-
+    if @event.save?(params[:locations], @current_user)
       redirect_to show_event_path(@event)
     else
-      redirect_to new_event_path, alert: 'Event not created'
+      flash[:danger] = 'Event not created'
+      redirect_to new_event_form_path
     end
   end
 
   def update_event
+    @event = Event.find(params[:id])
+
+    if @event.update?(event_params, params[:locations])
+      flash[:success] = 'Event updated successfully'
+      redirect_to show_event_path(@event)
+    else
+      flash[:danger] = 'Event not updated'
+      redirect_to edit_event_form_path(@event)
+    end
   end
 
   def delete_event
+    Event.destroy(params[:id]) ? flash[:success] = 'Event deleted' : flash[:danger] = 'Unable to delete event'
+    redirect_to show_user_path(@current_user)
   end
 
   private

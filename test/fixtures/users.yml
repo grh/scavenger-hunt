@@ -41,4 +41,4 @@ owner:
   password_salt: <%= password_salt %>
   roles: participant, owner
   owned_events: event2
-  owned_locations: location1
+  owned_locations: location1, location2

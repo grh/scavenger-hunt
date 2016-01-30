@@ -19,3 +19,6 @@
 # Ignore MySQL Workbench files
 /*.mwb
 /*.mwb.bak
+
+# Ignore Rubymine development dir
+/.idea/

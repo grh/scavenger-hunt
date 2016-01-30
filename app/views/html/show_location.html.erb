@@ -1,0 +1,50 @@
+<%= provide(:title, @location.name) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <h1 class="text-center"><%= @location.name %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 qr">
+      <%= raw @location.qrcode.as_html %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-centered">
+      <h4 class="description"><%= @location.description %></h4>
+    </div>
+  </div>
+
+  <% unless @location.events.empty? %>
+      <div class="row">
+        <div class="col-md-6 col-centered">
+          <div class="table-responsive dashboard-table">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Event</th>
+                <th>Start</th>
+                <th>End</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @location.events.each do |event| %>
+                  <tr>
+                    <td><%= event.title %></td>
+                    <td><%= event.start_date.strftime("%b %e, %Y") %></td>
+                    <td><%= event.end_date.strftime("%b %e, %Y") %></td>
+                    <td><%= link_to 'view', show_event_path(event) %> | <%= link_to 'edit', edit_event_form_path(event) %> | <%= link_to 'delete', delete_event_path(event), data: { confirm: 'Are you sure?'} %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

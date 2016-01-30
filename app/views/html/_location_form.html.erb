@@ -1,0 +1,15 @@
+<%= form_for @location, url: (current_page?(new_location_form_path) ? create_location_path : update_location_path), method: :post do |f| %>
+    <div class="form-group">
+      <%= f.label :name, 'Name' %>
+      <%= f.text_field :name, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, 'Description' %>
+      <%= f.text_area :description, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :coordinates, 'Coordinates' %>
+      <%= f.text_field :coordinates, class: 'form-control', required: 'true' %>
+    </div>
+    <%= f.submit 'Submit', class: 'btn btn-default' %>
+<% end %>

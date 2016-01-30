@@ -49,18 +49,25 @@ class HtmlController < ApplicationController
   #################
 
   def new_event_form
+    @event = Event.new
+    @locations = Location.joins(:owner).where(users: {id: session[:user_id]})
   end
 
   def edit_event_form
+    @event = Event.find(params[:id])
+    @locations = Location.joins(:owner).where(users: {id: session[:user_id]})
   end
 
   def new_location_form
+    @location = Location.new
   end
 
   def show_location
+    @location = Location.find(params[:id])
   end
 
   def edit_location_form
+    @location = Location.find(params[:id])
   end
 
   #################

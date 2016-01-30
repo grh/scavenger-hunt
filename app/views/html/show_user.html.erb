@@ -1,14 +1,12 @@
 <%= provide(:title, 'Dashboard') %>
 
 <div class="container">
-  <!-- Page title -->
   <div class="row">
     <div class="col-md-9 col-centered">
       <h3>Dashboard</h3>
     </div>
   </div>
 
-  <!-- Events table -->
   <div class="row">
     <div class="col-md-9 col-centered">
       <div class="table-responsive dashboard-table">
@@ -35,13 +33,15 @@
               </tr>
           <% end %>
 
-          <% @user.owned_events.each do |event| %>
-              <tr>
-                <td><%= event.title %></td>
-                <td><%= event.start_date.strftime("%b %e, %Y") %></td>
-                <td><%= event.end_date.strftime("%b %e, %Y") %></td>
-                <td><%= link_to 'view', show_event_path(event) %> | <%= link_to 'edit', edit_event_form_path(event) %> | <%= link_to 'delete', delete_event_path(event), data: { confirm: 'Are you sure?'} %></td>
-              </tr>
+          <% if @user.owner? %>
+              <% @user.owned_events.each do |event| %>
+                  <tr>
+                    <td><%= event.title %></td>
+                    <td><%= event.start_date.strftime("%b %e, %Y") %></td>
+                    <td><%= event.end_date.strftime("%b %e, %Y") %></td>
+                    <td><%= link_to 'view', show_event_path(event) %> | <%= link_to 'edit', edit_event_form_path(event) %> | <%= link_to 'delete', delete_event_path(event), data: { confirm: 'Are you sure?'} %></td>
+                  </tr>
+              <% end %>
           <% end %>
           </tbody>
         </table>
@@ -49,35 +49,58 @@
     </div>
   </div>
 
-  <!-- Locations table -->
-  <% unless @user.owned_locations.empty? %>
+  <% if @user.owner? %>
       <div class="row">
         <div class="col-md-9 col-centered">
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
+          <p class="text-center">
+            <%= link_to 'New event', new_event_form_path, class: 'text-center btn btn-default' %>
+          </p>
+        </div>
+      </div>
 
-              <tbody>
-              <% @user.owned_locations.each do |location| %>
-                  <tr>
-                    <td><%= location.name %></td>
-                    <td><%= location.description %></td>
-                    <td>
-                      <%= link_to 'view', show_location_path(location) %> |
-                      <%= link_to 'edit', edit_location_form_path(location) %> |
-                      <%= link_to 'delete', delete_location_path(location) %>
-                    </td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
+      <% unless @user.owned_locations.empty? %>
+          <div class="row">
+            <div class="col-md-9 col-centered">
+              <hr>
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-9 col-centered">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <% @user.owned_locations.each do |location| %>
+                      <tr>
+                        <td><%= location.name %></td>
+                        <td><%= location.description %></td>
+                        <td>
+                          <%= link_to 'view', show_location_path(location) %> |
+                          <%= link_to 'edit', edit_location_form_path(location) %> |
+                          <%= link_to 'delete', delete_location_path(location) %>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-md-9 col-centered">
+          <p class="text-center">
+            <%= link_to 'New location', new_location_form_path, class: 'text-center btn btn-default' %>
+          </p>
         </div>
       </div>
   <% end %>

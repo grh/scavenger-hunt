@@ -41,12 +41,16 @@ logout:
   tasks: update_session
 
 # owner permissions
-manage_event:
-  name: manage event
+manage_events:
+  name: manage events
   tasks: new_event_form, create_event, show_event, edit_event_form, update_event, delete_event
 
-manage_location:
-  name: manage location
-  tasks: new_location_form create_location, show_location, edit_location_form, update_location, delete_location
+manage_locations:
+  name: manage locations
+  tasks: new_location_form, create_location, show_location, edit_location_form, update_location, delete_location
 
 # admin permissions
+
+manage_users:
+  name: manage users
+  tasks: new_user_form, create_user, show_user, edit_user_form, update_user, delete_user

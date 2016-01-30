@@ -11,7 +11,7 @@ event2:
   description: event 2
   start_date: <%= Date.today - 1 %>
   end_date: <%= Date.today + 1 %>
-  locations: location1
+  locations: location1, location2
   owner: owner
 
 # an event that starts two weeks from now

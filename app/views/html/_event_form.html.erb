@@ -1,0 +1,44 @@
+<%= form_for @event, url: (current_page?(new_event_form_path) ? create_event_path : update_event_path), method: :post do |f| %>
+    <div class="form-group">
+      <%= f.label :title, 'Title' %>
+      <%= f.text_field :title, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, 'Description' %>
+      <%= f.text_area :description, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :start_date, 'Start Date' %>
+      <%= f.text_field :start_date, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :end_date, 'End Date' %>
+      <%= f.text_field :end_date, class: 'form-control', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Actions</th>
+            <th>Include?</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @locations.each do |location| %>
+              <tr>
+                <td><%= location.name %></td>
+                <td><%= location.description %></td>
+                <td><%= link_to 'map', "http://maps.google.com/?q=#{location.coordinates}", target: '_blank' %></td>
+                <td><%= check_box_tag 'locations[]', location.id, @event.locations.include?(location) %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= f.submit 'Submit', class: 'btn btn-default' %>
+<% end %>

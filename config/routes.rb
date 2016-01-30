@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/docs/user', to: 'html#user_doc', as: :user_doc
   get '/docs/developer', to: 'html#developer_doc', as: :developer_doc
   get '/signup', to: 'html#new_user_form', as: :signup_form
+  get '/user/new_user', to: 'html#new_user_form', as: :new_user_form
 
   # participant pages
   get '/login', to: 'html#login_form', as: :login_form
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
   get '/events', to: 'html#events', as: :events
   get '/locations', to: 'html#locations', as: :locations
   get '/users', to: 'html#users', as: :users
-  get '/user/new_user', to: 'html#new_user_form', as: :new_user_form
 
   ###############################################################
   # NORMAL ROUTES - NOTHING RENDERED; MODIFICATIONS MIGHT OCCUR #
@@ -53,7 +53,9 @@ Rails.application.routes.draw do
 
   # owner routes
   post '/event/create_event', to: 'events#create_event', as: :create_event
+  post '/event/:id/update', to: 'events#update_event', as: :update_event
   get '/event/:id/delete', to: 'events#delete_event', as: :delete_event
   post '/location/create_location', to: 'locations#create_location', as: :create_location
+  post '/location/:id/update', to: 'locations#update_location', as: :update_location
   get '/location/:id/delete', to: 'locations#delete_location', as: :delete_location
 end
