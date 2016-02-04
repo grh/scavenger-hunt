@@ -100,7 +100,8 @@ class User < ActiveRecord::Base
       end
     end
     new_user_form_task = Task.find_by(controller: 'html', action: 'new_user_form', request_method: 'GET')
-    if User.admins.empty?  and (current_task == new_user_form_task)
+    create_user_task = Task.find_by(controller: 'user', action: 'create_user', request_method: 'POST')
+    if User.admins.empty?  and (current_task == new_user_form_task or current_task = create_user_task)
       puts "#{User.admins.empty?} #{current_task} #{new_user_form_task}"
       authorized = true
     end
@@ -127,10 +128,10 @@ class User < ActiveRecord::Base
   def create
     status = false
     if self.save
-      if User.admin.empty?
-        @user.roles << [Role.admin, Role.owner, Role.participant]
+      if User.admins.empty?
+        self.roles << [Role.find_by_name('admin'), Role.find_by_name('owner'), Role.find_by_name('participant')]
       else
-        @user.roles << Role.default
+        self.roles << Role.default
       end
       #self.roles << Role.default  #this is replaced with admin conditional (above)
       status = true
