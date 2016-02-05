@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  skip_before_action :install, only: :create_user
+
   def create_user
     @user = User.new(user_params)
 
