@@ -24,7 +24,12 @@ class LocationsController < ApplicationController
 
   def delete_location
     Location.destroy(params[:id]) ? flash[:success] = 'Location deleted' : flash[:danger] = 'Unable to delete location'
-    redirect_to show_user_path(@current_user)
+
+    if @current_user.admin?
+      redirect_to show_all_locations_path
+    else
+      redirect_to show_user_path(@current_user)
+    end
   end
 
   private
