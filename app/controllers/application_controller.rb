@@ -9,12 +9,9 @@ class ApplicationController < ActionController::Base
 
   def install
     if User.admins.empty?
-      flash[:danger] = 'Please create an initial admin account'
-      #puts "running installation script"
-      redirect_to new_user_form_path
       # create an admin account
-      # redirect_to create_admin()
-      # display flash message 'An admin account needs to be created'
+      flash[:danger] = 'Please create an initial admin account'
+      redirect_to new_user_form_path
     end
   end
 
