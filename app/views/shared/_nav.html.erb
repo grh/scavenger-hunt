@@ -26,13 +26,13 @@ mple-navbar-collapse-1" aria-expanded="false">
             <% if @current_user.admin? %>
                 <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to 'Events', events_path %></li>
-                    <li><%= link_to 'Locations', locations_path %></li>
-                    <li><%= link_to 'Users', users_path %></li>
+                    <li><%= link_to 'Events', show_all_events_path %></li>
+                    <li><%= link_to 'Locations', show_all_locations_path %></li>
+                    <li><%= link_to 'Users', show_all_users_path %></li>
                   </ul>
                 </li>
             <% end %>
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user" aria-hidden="true"></i><%= @current_user.first_name %> <span class="caret"></span></a>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user" aria-hidden="true"></i> <%= @current_user.email %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'Account', edit_user_form_path(@current_user) %></li>
                 <li role="separator" class="divider"></li>

@@ -1,0 +1,47 @@
+<%= provide :title, 'Locations Admin' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <h3>Locations</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Location</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @locations.each do |location| %>
+              <tr>
+                <td><%= location.name %></td>
+                <td><%= location.description %></td>
+                <td>
+                  <%= link_to 'view', show_location_path(location) %> |
+                  <%= link_to 'edit', edit_location_form_path(location) %> |
+                  <%= link_to 'delete', delete_location_path(location) %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <p class="text-center">
+        <%= link_to 'New location', new_location_form_path, class: 'text-center btn btn-default' %>
+      </p>
+    </div>
+  </div>
+</div>

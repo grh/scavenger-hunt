@@ -24,7 +24,11 @@ class EventsController < ApplicationController
 
   def delete_event
     Event.destroy(params[:id]) ? flash[:success] = 'Event deleted' : flash[:danger] = 'Unable to delete event'
-    redirect_to show_user_path(@current_user)
+    if @current_user.admin?
+      redirect_to show_all_events_path
+    else
+      redirect_to show_user_path(@current_user)
+    end
   end
 
   private

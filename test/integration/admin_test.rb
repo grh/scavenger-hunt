@@ -1,9 +1,78 @@
 require 'test_helper'
 
-class OwnerTest < ActionDispatch::IntegrationTest
-  test 'owner can create event' do
+class AdminTest < ActionDispatch::IntegrationTest
+  test 'admin can create new user' do
+    # login as admin
+    admin = login(:admin, show_user_path(users(:admin)))
+
+    # click on 'new user' link
+    get_via_redirect new_user_form_path, { controller: :html, action: :new_user_form_path }
+    assert_template 'html/new_user_form'
+
+    # submit account information and
+    # verify redirected to users admin
+    new_user = User.new(
+        first_name: 'New',
+        last_name: 'User',
+        email: 'new@user.com'
+    )
+    post_via_redirect create_user_path, {
+        controller: :users,
+        action: :create_user,
+        user: {
+            first_name: new_user.first_name,
+            last_name: new_user.last_name,
+            email: new_user.email,
+            password: password,
+            password_confirmation: password,
+            role_ids: [roles(:participant).id]
+        }
+    }
+    assert_template 'html/show_all_users'
+    assert_equal new_user.email, User.last.email
+    assert User.last.roles.include? Role.find_by_name('participant')
+  end
+
+  test 'admin can edit user' do
+    # login as admin
+    admin = login(:admin, show_user_path(users(:admin)))
+
+    # click on 'edit user' link
+    get_via_redirect edit_user_form_path, { controller: :html, action: :edit_user_form_path }
+    assert_template 'html/edit_user_form'
+
+    # submit account information and
+    # verify redirected to users admin
+    user = users(:participant)
+    post_via_redirect update_user_path(user), {
+        controller: :users,
+        action: :create_user,
+        user: {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            password: 'new_password',
+            password_confirmation: 'new_password',
+            role_ids: [roles(:participant).id]
+        }
+    }
+    assert_template 'html/show_all_users'
+  end
+
+  test 'admin can delete user' do
+    # login as admin
+    admin = login(:admin, show_user_path(users(:admin)))
+
+    # click on 'delete user' link
+    user = users(:participant)
+    get_via_redirect delete_user_path(user), { controller: :users, action: :delete_user }
+    assert_template 'html/show_all_users'
+  end
+
+  test 'admin can create event' do
+    # login as admin and
     # click on 'create event' link
-    user = login(:owner, show_user_path(users(:owner)))
+    user = login(:admin, show_user_path(users(:admin)))
     get_via_redirect new_event_form_path, { controller: :html, action: :new_event_form }
     assert_template 'html/new_event_form'
 
@@ -25,10 +94,10 @@ class OwnerTest < ActionDispatch::IntegrationTest
     assert Event.last.owner.include? user
   end
 
-  test 'owner can edit event' do
-    # login as owner and
+  test 'admin can edit event' do
+    # login as admin and
     # click on 'edit event' link
-    user = login(:owner, show_user_path(users(:owner)))
+    user = login(:admin, show_user_path(users(:admin)))
     event = events(:event2); event.description = 'new description'
     get_via_redirect edit_event_form_path(event), { controller: :html, action: :edit_event_form }
     assert_template 'html/edit_event_form'
@@ -50,20 +119,20 @@ class OwnerTest < ActionDispatch::IntegrationTest
     assert_equal Event.find(event.id), event
   end
 
-  test 'owner can delete event' do
-    # login as owner and
-    # click on 'delete event' link
-    user = login(:owner, show_user_path(users(:owner)))
-    event = events(:event2); event.description = 'new description'
+  test 'admin can delete event' do
+    # login as admin and
+    # click on 'delete location' link
+    user = login(:admin, show_user_path(users(:admin)))
+    event = events(:event2)
     get_via_redirect delete_event_path(event), { controller: :events, action: :delete_event }
-    assert_template 'html/show_user'
+    assert_template 'html/show_all_events'
     assert_equal 'Event deleted', flash[:success]
-    assert_not Event.all.include? event
   end
 
-  test 'owner can create location' do
+  test 'admin can create location' do
+    # login as admin and
     # click on 'create location' link
-    user = login(:owner, show_user_path(users(:owner)))
+    user = login(:admin, show_user_path(users(:admin)))
     get_via_redirect new_location_form_path, { controller: :html, action: :new_location_form }
     assert_template 'html/new_location_form'
 
@@ -80,22 +149,12 @@ class OwnerTest < ActionDispatch::IntegrationTest
         }
     }
     assert_template 'html/show_location'
-    assert Location.last.owner.include? user
   end
 
-  test 'owner can view location' do
-    # login as owner
-    user = login(:owner, show_user_path(users(:owner)))
-    # click on 'view locatin' link
-    location = locations(:location1)
-    get_via_redirect show_location_path(location), { controller: :html, action: :show_location }
-    assert_template 'html/show_location'
-  end
-
-  test 'owner can edit location' do
-    # login as owner and
+  test 'admin can edit location' do
+    # login as admin and
     # click on 'edit location' link
-    user = login(:owner, show_user_path(users(:owner)))
+    user = login(:admin, show_user_path(users(:admin)))
     location = locations(:location1); location.description = 'new description'
     get_via_redirect edit_location_form_path(location), { controller: :html, action: :edit_location_form }
     assert_template 'html/edit_location_form'
@@ -115,13 +174,13 @@ class OwnerTest < ActionDispatch::IntegrationTest
     assert_equal Location.find(location.id), location
   end
 
-  test 'owner can delete location' do
-    # login as owner and
+  test 'admin can delete location' do
+    # login as admin and
     # click on 'delete location' link
-    user = login(:owner, show_user_path(users(:owner)))
+    user = login(:admin, show_user_path(users(:admin)))
     location = locations(:location1)
     get_via_redirect delete_location_path(location), { controller: :locations, action: :delete_location }
-    assert_template 'html/show_user'
+    assert_template 'html/show_all_locations'
     assert_equal 'Location deleted', flash[:success]
   end
 end

@@ -74,12 +74,15 @@ class HtmlController < ApplicationController
   # ADMIN ACTIONS #
   #################
 
-  def events
+  def show_all_events
+    @events = Event.all
   end
 
-  def locations
+  def show_all_locations
+    @locations = Location.all
   end
 
-  def users
+  def show_all_users
+    @users = User.all
   end
 end

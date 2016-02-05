@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/event/:id', to: 'html#show_event', as: :show_event
   get '/join/:event_id', to: 'users#join_event', as: :join_event
   get '/visit/:tag', to: 'users#visit_location', as: :visit_location
+  get '/user/:id/delete', to: 'users#delete_user', as: :delete_user
 
   # owner pages
   get '/event/:id/edit', to: 'html#edit_event_form', as: :edit_event_form
@@ -34,9 +35,9 @@ Rails.application.routes.draw do
   get '/location/:id/edit', to: 'html#edit_location_form', as: :edit_location_form
 
   # admin pages
-  get '/events', to: 'html#events', as: :events
-  get '/locations', to: 'html#locations', as: :locations
-  get '/users', to: 'html#users', as: :users
+  get '/events', to: 'html#show_all_events', as: :show_all_events
+  get '/locations', to: 'html#show_all_locations', as: :show_all_locations
+  get '/users', to: 'html#show_all_users', as: :show_all_users
 
   ###############################################################
   # NORMAL ROUTES - NOTHING RENDERED; MODIFICATIONS MIGHT OCCUR #

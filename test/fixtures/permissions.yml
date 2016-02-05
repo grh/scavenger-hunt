@@ -1,20 +1,20 @@
 # guest permissions
 view_public_pages:
   name: view public pages
-  tasks: root, about, user_doc, developer_doc
+  tasks: home, about, user_doc, developer_doc
 
 create_account:
   name: create account
-  tasks: signup_form, create_user
+  tasks: new_user_form, create_user
 
 login:
   name: login
   tasks: login_form, create_session
 
 # participant permissions
-view_dashboard:
-  name: view_dashboard
-  tasks: show_user
+manage_own_account:
+  name: manage own account
+  tasks: show_user, edit_user_form, update_user, delete_user
 
 view_event:
   name: view event
@@ -32,25 +32,28 @@ leave_event:
   name: leave event
   tasks: leave_event
 
-edit_account:
-  name: edit account
-  tasks: edit_user_form, update_user
-
 logout:
   name: logout
   tasks: update_session
 
 # owner permissions
-manage_events:
-  name: manage events
+manage_own_events:
+  name: manage own events
   tasks: new_event_form, create_event, show_event, edit_event_form, update_event, delete_event
 
-manage_locations:
-  name: manage locations
+manage_own_locations:
+  name: manage own locations
   tasks: new_location_form, create_location, show_location, edit_location_form, update_location, delete_location
 
 # admin permissions
+manage_all_events:
+  name: manage all events
+  tasks: show_all_events, new_event_form, create_event, show_event, edit_event_form, update_event, delete_event
 
-manage_users:
-  name: manage users
-  tasks: new_user_form, create_user, show_user, edit_user_form, update_user, delete_user
+manage_all_locations:
+  name: manage all locations
+  tasks: show_all_locations, new_location_form, create_location, show_location, edit_location_form, update_location, delete_location
+
+manage_all_users:
+  name: manage all users
+  tasks: show_all_users, new_user_form, create_user, show_user, edit_user_form, update_user, delete_user

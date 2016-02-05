@@ -21,4 +21,4 @@
 /*.mwb.bak
 
 # Ignore Rubymine development dir
-/.idea/
+/.idea

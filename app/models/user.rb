@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
     permitted = true
     case request_path
       when /\/user\/([0-9]+)/
-        permitted = false unless self.id.to_s == $1
+        permitted = false unless self.id.to_s == $1 or self.admin?
     end
     return permitted
   end

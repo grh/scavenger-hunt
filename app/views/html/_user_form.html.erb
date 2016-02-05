@@ -19,5 +19,18 @@
       <%= f.label :password_confirmation, 'Confirm Password' %>
       <%= f.password_field :password_confirmation, class: 'form-control', required: 'true' %>
     </div>
+    <% if @current_user.admin? %>
+        <div class="form-group">
+          <%= f.label :roles %>
+          <%= f.collection_check_boxes :role_ids, Role.all, :id, :name, { class: 'form-control' } do |r| %>
+              <div class="row">
+                <div class="col-md-6">
+                  <%= r.check_box %>
+                  <%= r.label %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
     <%= f.submit 'Submit', class: 'btn btn-default' %>
 <% end %>

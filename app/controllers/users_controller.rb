@@ -3,11 +3,15 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.create
-      if login(@user)
-        redirect_to show_user_path(@user)
+      unless @current_user.admin?
+        if login(@user)
+          redirect_to show_user_path(@user)
+        else
+          flash[:danger] = 'Error with new user account'
+          render 'new_user_form'
+        end
       else
-        flash[:danger] = 'Error with new user account'
-        render 'new_user_form'
+        redirect_to show_all_users_path
       end
     else
       flash.now[:danger] = 'Invalid email or password'
@@ -20,7 +24,11 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Account updated successfully'
-      redirect_to show_user_path(@user)
+      if @current_user.admin?
+        redirect_to show_all_users_path
+      else
+        redirect_to show_user_path(@user)
+      end
     else
       flash[:danger] = 'Account not updated'
       redirect_to edit_user_form_path(@user)
@@ -28,6 +36,12 @@ class UsersController < ApplicationController
   end
 
   def delete_user
+    User.destroy(params[:id]) ? flash[:success] = 'Account deleted' : flash[:danger] = 'Unable to delete event'
+    if @current_user.admin?
+      redirect_to show_all_users_path
+    else
+      redirect_to root_path
+    end
   end
 
   def join_event
@@ -68,6 +82,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, role_ids: [])
   end
 end

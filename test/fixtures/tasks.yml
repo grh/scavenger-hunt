@@ -8,7 +8,7 @@
 #<% end %>
 
 # guest tasks
-root:
+home:
   controller: html
   action: home
   request_method: GET
@@ -28,7 +28,7 @@ developer_doc:
   action: developer_doc
   request_method: GET
 
-signup_form:
+new_user_form:
   controller: html
   action: new_user_form
   request_method: GET
@@ -52,6 +52,21 @@ create_session:
 show_user:
   controller: html
   action: show_user
+  request_method: GET
+
+edit_user_form:
+  controller: html
+  action: edit_user_form
+  request_method: GET
+
+update_user:
+  controller: users
+  action: update_user
+  request_method: POST
+
+delete_user:
+  controller: users
+  action: delete_user
   request_method: GET
 
 show_event:
@@ -78,16 +93,6 @@ leave_event:
   controller: users
   action: leave_event
   request_method: GET
-
-edit_user_form:
-  controller: html
-  action: edit_user_form
-  request_method: GET
-
-update_user:
-  controller: users
-  action: update_user
-  request_method: POST
 
 # owner tasks
 new_event_form:
@@ -151,7 +156,17 @@ delete_location:
   request_method: GET
 
 # admin tasks
-new_user_form:
-  controller: users
-  action: new_user_form
+show_all_events:
+  controller: html
+  action: show_all_events
+  request_method: GET
+
+show_all_locations:
+  controller: html
+  action: show_all_locations
+  request_method: GET
+
+show_all_users:
+  controller: html
+  action: show_all_users
   request_method: GET
