@@ -57,3 +57,7 @@ manage_all_locations:
 manage_all_users:
   name: manage all users
   tasks: show_all_users, new_user_form, create_user, show_user, edit_user_form, update_user, delete_user
+  
+setup_site_view:
+  name: setup site view
+  tasks: view_setup_form

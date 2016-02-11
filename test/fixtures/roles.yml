@@ -12,4 +12,4 @@ owner:
 
 admin:
   name: admin
-  permissions: manage_all_events, manage_all_locations, manage_all_users
+  permissions: manage_all_events, manage_all_locations, manage_all_users, setup_site_view

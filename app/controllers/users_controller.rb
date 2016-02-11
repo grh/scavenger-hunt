@@ -14,7 +14,11 @@ class UsersController < ApplicationController
           render 'new_user_form'
         end
       else
-        redirect_to show_all_users_path
+        unless (User.last.admin? and admin.size == 1)
+          redirect_to show_all_users_path
+        else 
+          redirect_to view_setup_form_path
+        end
       end
     else
       flash.now[:danger] = 'Invalid email or password'

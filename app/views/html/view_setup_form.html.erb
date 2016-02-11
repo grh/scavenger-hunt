@@ -1,0 +1,32 @@
+<%= provide(:title, 'View Setup') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 col-centered">
+      <h3>Initial View Setup</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 col-centered">
+      <div class="form-group">
+        <%= label :logo, 'Website Logo' %>
+        <%= text_field :logo, class: 'form-control', required: 'true' %>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+        <p>Select a theme color: </p>
+          <select>
+            <option value="1" style="background:red">Red</option>
+            <option value="2" style="background:green">Green</option>
+            <option value="3" style="background:blue">Blue</option>
+            <option value="4" style="background:orange">Orange</option>
+            <option value="4" style="background:purple">Purple</option>
+          </select>
+        <br/>  
+        <br/>
+        </div>
+      </div>
+    <%= submit_tag 'Initialize', class: 'btn btn-default'%>  
+    </div>
+  </div>
+</div>

@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get '/events', to: 'html#show_all_events', as: :show_all_events
   get '/locations', to: 'html#show_all_locations', as: :show_all_locations
   get '/users', to: 'html#show_all_users', as: :show_all_users
+  get '/setup', to: 'html#view_setup_form', as: :view_setup_form
 
   ###############################################################
   # NORMAL ROUTES - NOTHING RENDERED; MODIFICATIONS MIGHT OCCUR #

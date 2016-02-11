@@ -87,4 +87,7 @@ class HtmlController < ApplicationController
   def show_all_users
     @users = User.all
   end
+
+  def view_setup_form
+  end
 end
