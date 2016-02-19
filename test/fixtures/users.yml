@@ -50,3 +50,4 @@ owner:
 #  password_hash: <%= password_hash %>
 #  password_salt: <%= password_salt %>
 #  roles: participant, owner, admin
+
