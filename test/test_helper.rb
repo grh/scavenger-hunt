@@ -21,7 +21,7 @@ class ActiveSupport::TestCase
     user = users(u)
     post_via_redirect create_session_path, {
         controller: :sessions,
-        action: :create,
+        action: :create_session,
         user: {
             email: user.email,
             password: password

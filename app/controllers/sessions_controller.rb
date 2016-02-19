@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
   def create_session
     @user = User.authenticate(user_params)
-    if login(@user)
+    if @user
+      login(@user)
       if params[:redirect_to].empty?
         redirect_to show_user_path(@user)
       else
         redirect_to params[:redirect_to]
       end
     else
-      #flash.now[:danger] = 'Invalid email or password'
+      flash.now[:danger] = 'Invalid email or password'
       render 'html/login_form'
     end
   end
