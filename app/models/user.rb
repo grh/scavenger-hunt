@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
   has_many :visits
   has_many :visited_locations, through: :visits, source: 'location'
 
-  # option/user associations
-  has_one :options
-  
   # role/user assocations
   has_and_belongs_to_many :roles
 
