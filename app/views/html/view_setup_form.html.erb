@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-md-5">
-        <p>Select a theme color: </p>
+        <p>Select a theme color: </p>   <!-- update this message for entering proper sass formatted color?
           <select>
             <option value="1" style="background:red">Red</option>
             <option value="2" style="background:green">Green</option>
@@ -23,7 +23,11 @@
             <option value="4" style="background:purple">Purple</option>
           </select>
         <br/>  
-        <br/>
+        <br/>    -->
+          <div class="form-group">
+            <%= label :color, 'Website Color' %>
+            <%= text_field :color, class: 'form-control', required: 'false' %>
+          </div>
         </div>
       </div>
     <%= submit_tag 'Initialize', class: 'btn btn-default'%>  

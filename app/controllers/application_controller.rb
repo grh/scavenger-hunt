@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  LOGO = 'UNLV'
+  # LOGO = 'UNLV'
   APP_NAME = 'Scavenger Hunt'
 
   protect_from_forgery with: :exception
@@ -39,9 +39,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def logo
-    return LOGO
-  end
+  # def logo
+  #   return LOGO
+  # end
 
   def app_name
     return APP_NAME

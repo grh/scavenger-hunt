@@ -7,9 +7,9 @@ class Event < ActiveRecord::Base
   # event/location associations
   has_and_belongs_to_many :locations
 
-  # recent: list recent events
+  # current: list current events
   # parameters: none
-  # return value: a collection of recent events that are either
+  # return value: a collection of current events that are either
   #               ongoing or finished within the last 2 weeks
   def self.current
     where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc)
