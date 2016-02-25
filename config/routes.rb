@@ -60,4 +60,7 @@ Rails.application.routes.draw do
   post '/location/create_location', to: 'locations#create_location', as: :create_location
   post '/location/:id/update', to: 'locations#update_location', as: :update_location
   get '/location/:id/delete', to: 'locations#delete_location', as: :delete_location
+  
+  # admin routes
+  post '/setup', to: 'application#update_options', as: :update_options
 end

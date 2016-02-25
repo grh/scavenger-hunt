@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
-  # LOGO = 'UNLV'
   APP_NAME = 'Scavenger Hunt'
 
   protect_from_forgery with: :exception
 
-  helper_method :logo, :app_name
+  helper_method :app_name
   before_action :install, :current_user, :current_task, :authorize
 
   def install
@@ -39,9 +38,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def logo
-  #   return LOGO
-  # end
+  def update_options
+    #verify @current_user is admin
+    @options = Option.last
+  end
 
   def app_name
     return APP_NAME

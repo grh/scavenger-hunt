@@ -8,29 +8,22 @@
   </div>
   <div class="row">
     <div class="col-md-7 col-centered">
-      <div class="form-group">
-        <%= label :logo, 'Website Logo' %>
-        <%= text_field :logo, class: 'form-control', required: 'true' %>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-        <p>Select a theme color: </p>   <!-- update this message for entering proper sass formatted color?
-          <select>
-            <option value="1" style="background:red">Red</option>
-            <option value="2" style="background:green">Green</option>
-            <option value="3" style="background:blue">Blue</option>
-            <option value="4" style="background:orange">Orange</option>
-            <option value="4" style="background:purple">Purple</option>
-          </select>
-        <br/>  
-        <br/>    -->
+      <%= form_for @options, url: update_options_path, method: :post do |f| %>
           <div class="form-group">
-            <%= label :color, 'Website Color' %>
-            <%= text_field :color, class: 'form-control', required: 'false' %>
+            <%= f.label :logo, 'Website Logo' %>
+            <%= f.text_field :logo, class: 'form-control', required: 'true' %>
           </div>
-        </div>
-      </div>
-    <%= submit_tag 'Initialize', class: 'btn btn-default'%>  
+          <div class="row">
+            <div class="col-md-5">
+            <p>Enter a theme color from Sass: </p> 
+              <div class="form-group">
+                <%= f.label :color, 'Website Color' %>
+                <%= f.text_field :color, class: 'form-control', required: 'true' %>
+              </div>
+            </div>
+            <%= f.submit 'Initialize', class: 'btn btn-default'%>  
+          </div>
+      <% end %>
     </div>
   </div>
 </div>

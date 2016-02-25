@@ -1,11 +1,12 @@
 class Option < ActiveRecord::Base
+  #after_find :color, :logo 
 
   def self.color
-    option.last.color
+    Option.last.color
   end
   
   def self.logo
-    option.last.logo
+    Option.last.logo
   end
 
 end
