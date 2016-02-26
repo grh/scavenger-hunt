@@ -1,8 +1,6 @@
 class OptionsController < ApplicationController
   def create_option
-    @option = Option.new(option_params)
-
-    if @option.create
+    if Option.create(option_params)
       flash[:success] = 'Options saved!'
       redirect_to show_user_path(@current_user)
     else
