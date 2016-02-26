@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def install
     if User.admins.empty?
       # create an admin account
-      flash[:danger] = 'Please create an initial admin account'
+      flash[:danger] = Messages::ErrorMessages::CreateInitialAdminAcct
       redirect_to new_user_form_path
     end
   end
@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
     unless @current_user.authorized? @current_task and @current_user.permitted? request.path
       case request.path
         when /\/event\/[0-9]+/, /\/join\/[0-9]+/, /\/visit\/\w+/
-          flash[:danger] = 'You must be logged in'
+          flash[:danger] = Messages::ErrorMessages::MustBeLoggedIn
           redirect_to login_form_path(redirect_to: request.path)
         when /\/user\/([0-9]+)/
-          flash[:danger] = 'You are not authorized to access that page!'
+          flash[:danger] = Messages::ErrorMessages::UnauthorizedAccess
           redirect_to show_user_path(@current_user)
         else
-          flash[:danger] = 'You are not authorized to access that page!'
+          flash[:danger] = Messages::ErrorMessages::UnauthorizedAccess
           redirect_to @current_user.guest? ? root_path : show_user_path(@current_user)
       end
     end

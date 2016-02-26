@@ -28,12 +28,12 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
-  validates :email, format: {with: /\w+@\w+\.\w+/, message: "email address is not a valid format"}
-  validates :email, format: {without: /\s+/, message: "email address cannot contain spaces"}
-  validates :password, length: {minimum: 8, message: "password must be at least 8 characters long"}
-  validates :password, format: {without: /\s+/, message: "password cannot contain any spaces"}
+  validates :email, format: { with: /\w+@\w+\.\w+/, message: Messages::ErrorMessages::InvalidEmailFormat }
+  validates :email, format: { without: /\s+/, message: Messages::ErrorMessages::InvalidEmailSpaces }
+  validates :password, length: { minimum: 8, message: Messages::ErrorMessages::PasswordTooShort }
+  validates :password, format: { without: /\s+/, message: Messages::ErrorMessages::InvalidPasswordSpaces }
   validates :password, confirmation: true
-  validates :password_confirmation, presence: true, if: "password.present?"
+  validates :password_confirmation, presence: true, if: 'password.present?'
 
   #################
   # CLASS METHODS #
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   # returns whether or not the user has that role
   # (i.e., user.admin?, user.owner?, etc.)
   Role.all.each do |role|
-    define_method (role.name + "?").to_sym do
+    define_method (role.name + '?').to_sym do
       return self.roles.include? Role.find_by_name role.name
     end
   end
