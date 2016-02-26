@@ -170,3 +170,13 @@ show_all_users:
   controller: html
   action: show_all_users
   request_method: GET
+
+view_setup_form:
+  controller: html
+  action: view_setup_form
+  request_method: GET
+  
+update_options:
+  controller: options
+  action: update_options
+  request_method: POST

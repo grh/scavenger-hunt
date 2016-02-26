@@ -6,15 +6,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.create
-      unless @current_user.admin?
-        if login(@user)
-          redirect_to show_user_path(@user)
+      if login(@user)
+        if @current_user.admin?
+          redirect_to show_all_users_path
+        elsif User.last.admin? and User.admins.size == 1
+          redirect_to view_setup_form_path
         else
-          flash[:danger] = 'Error with new user account'
-          render 'new_user_form'
+          redirect_to show_user_path(@user)
         end
       else
-        redirect_to show_all_users_path
+        flash[:danger] = 'Error with new user account'
+        render 'new_user_form'
       end
     else
       flash.now[:danger] = 'Invalid email or password'

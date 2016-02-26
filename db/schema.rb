@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 15) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "options", force: :cascade do |t|
+    t.string "logo"
+    t.string "color"
+  end
+
   create_table "owned_events", id: false, force: :cascade do |t|
     t.integer "event_id"
     t.integer "user_id"
@@ -103,16 +108,6 @@ ActiveRecord::Schema.define(version: 15) do
 
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
-
-  create_table "sessions", force: :cascade do |t|
-    t.string   "session_id"
-    t.datetime "deleted_at"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "controller"

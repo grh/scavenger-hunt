@@ -1,11 +1,10 @@
 class ApplicationController < ActionController::Base
-  LOGO = 'UNLV'
   APP_NAME = 'Scavenger Hunt'
 
   protect_from_forgery with: :exception
 
-  helper_method :logo, :app_name
-  before_action :install, :current_session, :current_user, :current_task, :authorize
+  helper_method :app_name
+  before_action :install, :current_user, :current_task, :authorize
 
   def install
     if User.admins.empty?
@@ -21,10 +20,6 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user = User.current_user(session)
-  end
-
-  def current_session
-    @current_session = Session.find_by_session_id(session[:session_id])
   end
 
   def authorize
@@ -43,10 +38,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def logo
-    return LOGO
-  end
-
   def app_name
     return APP_NAME
   end
@@ -54,21 +45,10 @@ class ApplicationController < ActionController::Base
   def login(user)
     reset_session
     session[:user_id] = user.id
-
-    if user.sessions.create(session_id: session[:session_id], user_id: user.id)
-      return true
-    else
-      return false
-    end
   end
 
   def logout
-    if Session.logout(session[:session_id])
-      reset_session
-      redirect_to root_url
-    else
-      flash[:danger] = 'Unable to logout'
-      redirect_to show_user_path(@current_user)
-    end
+    reset_session
+    redirect_to root_url
   end
 end

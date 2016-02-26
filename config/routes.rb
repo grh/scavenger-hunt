@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get '/events', to: 'html#show_all_events', as: :show_all_events
   get '/locations', to: 'html#show_all_locations', as: :show_all_locations
   get '/users', to: 'html#show_all_users', as: :show_all_users
+  get '/setup', to: 'html#view_setup_form', as: :view_setup_form
 
   ###############################################################
   # NORMAL ROUTES - NOTHING RENDERED; MODIFICATIONS MIGHT OCCUR #
@@ -59,4 +60,7 @@ Rails.application.routes.draw do
   post '/location/create_location', to: 'locations#create_location', as: :create_location
   post '/location/:id/update', to: 'locations#update_location', as: :update_location
   get '/location/:id/delete', to: 'locations#delete_location', as: :delete_location
+  
+  # admin routes
+  post '/setup', to: 'options#update_options', as: :update_options
 end
