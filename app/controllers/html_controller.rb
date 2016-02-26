@@ -89,5 +89,6 @@ class HtmlController < ApplicationController
   end
 
   def view_setup_form
+    @options = Option.last
   end
 end

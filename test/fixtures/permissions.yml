@@ -60,4 +60,4 @@ manage_all_users:
   
 setup_site_view:
   name: setup site view
-  tasks: view_setup_form
+  tasks: view_setup_form, update_options

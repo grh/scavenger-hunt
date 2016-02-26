@@ -1,5 +1,4 @@
 class Option < ActiveRecord::Base
-  #after_find :color, :logo 
 
   def self.color
     Option.last.color

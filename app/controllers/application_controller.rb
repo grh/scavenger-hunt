@@ -38,11 +38,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def update_options
-    #verify @current_user is admin
-    @options = Option.last
-  end
-
   def app_name
     return APP_NAME
   end
