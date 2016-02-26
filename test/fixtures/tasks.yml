@@ -171,12 +171,22 @@ show_all_users:
   action: show_all_users
   request_method: GET
 
-view_setup_form:
+new_option_form:
   controller: html
-  action: view_setup_form
+  action: new_option_form
   request_method: GET
   
-update_options:
+edit_option_form:
+  controller: html
+  action: edit_option_form
+  request_method: GET
+
+create_option:
   controller: options
-  action: update_options
+  action: create_option
+  request_method: POST
+
+update_option:
+  controller: options
+  action: update_option
   request_method: POST

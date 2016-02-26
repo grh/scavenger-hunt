@@ -1,11 +1,24 @@
-class OptionsController < ActionController::Base
+class OptionsController < ApplicationController
+  def create_option
+    @option = Option.new(option_params)
 
-  def update_options
-    @options = Option.last
-    if @options.update(option_params)
-      redirect_to show_all_users_path
+    if @option.create
+      flash[:success] = 'Options saved!'
+      redirect_to show_user_path(@current_user)
     else
-      flash[:danger] = 'View not updated'
+      flash[:danger] = 'Options not saved!'
+      redirect_to new_option_form_path
+    end
+  end
+
+  def update_option
+    @option = Option.last
+    if @option.update(option_params)
+      flash[:success] = 'Options saved!'
+      redirect_to show_user_path(@current_user)
+    else
+      flash[:danger] = 'Options not saved!'
+      redirect_to new_option_form_path
     end
   end
   

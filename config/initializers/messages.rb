@@ -8,6 +8,4 @@ module Messages
     MustBeLoggedIn = 'You must be logged in'
     UnauthorizedAccess = 'You are not authorized to access that page!'
   end
-
-  class
 end

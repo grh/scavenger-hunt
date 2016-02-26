@@ -88,7 +88,11 @@ class HtmlController < ApplicationController
     @users = User.all
   end
 
-  def view_setup_form
-    @options = Option.last
+  def new_option_form
+    @option = Option.new
+  end
+
+  def edit_option_form
+    @option = Option.last
   end
 end
