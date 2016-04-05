@@ -1,6 +1,8 @@
 class OptionsController < ApplicationController
   def create_option
     if Option.create(option_params)
+      # clear cache so CSS will recompile with new option
+      `rake tmp:cache:clear`
       flash[:success] = 'Options saved!'
       redirect_to show_user_path(@current_user)
     else
