@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   # public pages
   get '/', to: 'html#home', as: :root
-  get '/about', to: 'html#about', as: :about
+  get '/about', to: 'html#about_doc', as: :about
   get '/docs/user', to: 'html#user_doc', as: :user_doc
   get '/docs/developer', to: 'html#developer_doc', as: :developer_doc
   get '/signup', to: 'html#new_user_form', as: :signup_form

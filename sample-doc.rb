@@ -1,7 +1,7 @@
 =begin
 = ABOUT
 
-    Welcome to UNLV's QR Code Scavenger Hunt Site! This program was originally
+    Welcome to UNLV's QR Code Scavenger Hunt Site! This application was originally
     conceived by Ed Jorgensen and Guymon Hall to help students familiarize
     themselves with various locations around the UNLV campus.
 
@@ -10,10 +10,9 @@
     * Reiley Porter
     * Carmon Wong
     * Beverly Wood
-    * Boaty McBoatface
 
-    We encourage you to contribute to this project by contacting Guymon for
-    more information on how to get started.
+    We encourage you to contribute to this project by contacting Guymon Hall
+    (g u y m o n . h a l l @ u n l v . e d u) for more information on how to get started.
 
 = LICENSE
 
@@ -43,9 +42,17 @@
 =end
 
 =begin
-= USER -> h3
+= USER
+
+= INTRODUCTION
+
+  In this QR Code Scavenger Hunt, you can create and participate in various scavenger hunt events.
+
 =end
 
 =begin
-= DEVELOPER -> h3
+= DEVELOPER
+
+= INTRODUCTION
+
 =end

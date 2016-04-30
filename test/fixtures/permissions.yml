@@ -1,7 +1,7 @@
 # guest permissions
 view_public_pages:
   name: view public pages
-  tasks: home, about, user_doc, developer_doc
+  tasks: home, about_doc, user_doc, developer_doc
 
 create_account:
   name: create account
