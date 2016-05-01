@@ -13,9 +13,9 @@ home:
   action: home
   request_method: GET
 
-about:
+about_doc:
   controller: html
-  action: about
+  action: about_doc
   request_method: GET
 
 user_doc:

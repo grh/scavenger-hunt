@@ -10,7 +10,7 @@ class HtmlController < ApplicationController
     @upcoming_events = Event.upcoming
   end
 
-  def about
+  def about_doc
   end
 
   def user_doc
