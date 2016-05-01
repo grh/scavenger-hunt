@@ -53,6 +53,9 @@ module OurDoc
                       str += line + ' '
                       line = f.gets.chomp; line.lstrip!
                     end
+
+                    str.lstrip!
+
                     comment.content << { p: str }
                 end
               end
@@ -73,15 +76,15 @@ module OurDoc
     provides_str = "<%= provide(:title, '#{type.capitalize}') %>"
     container_div = '<div class="container">'
     row_div = '<div class="row">'
-    col_div = '<div class="col-md-9 col-centered">'
+    col9_div = '<div class="col-md-9 col-centered">'
+    col10_div = '<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">'
     div_close = '</div>'
     File.open("#{basedir_str}/#{type}_doc.html.erb", 'w') do |f|
       f.puts provides_str
       f.puts container_div
-
-      # page title
       f.puts row_div
-      f.puts col_div
+      f.puts col9_div
+
       f.puts "<h3>#{type.capitalize}</h3>"
 
       # start iterating over the about comments...
@@ -93,16 +96,24 @@ module OurDoc
                 f.puts div_close
                 f.puts div_close
                 f.puts row_div
-                f.puts col_div
-                f.puts ("<h3>" + v.capitalize + "</h3>")
+                f.puts col9_div
+                f.puts ("<h3>#{v.capitalize}</h3>")
               when :p
-                f.puts ("<p>" + v + "</p>")
+                f.puts row_div
+                f.puts col10_div
+                f.puts ("<p>#{v}</p>")
+                f.puts div_close
+                f.puts div_close
               when :ul
+                f.puts row_div
+                f.puts col10_div
                 f.puts '<ul>'
                 v.each do |li|
                   f.puts "<li>#{li}</li>"
                 end
                 f.puts '</ul>'
+                f.puts div_close
+                f.puts div_close
             end
           end
         end
