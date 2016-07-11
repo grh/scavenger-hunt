@@ -57,7 +57,7 @@ class OwnerTest < ActionDispatch::IntegrationTest
     event = events(:event2); event.description = 'new description'
     get_via_redirect delete_event_path(event), { controller: :events, action: :delete_event }
     assert_template 'html/show_user'
-    assert_equal 'Event deleted', flash[:success]
+    assert_equal Messages::InfoMessages::EventDeleted, flash[:success]
     assert_not Event.all.include? event
   end
 
@@ -122,6 +122,6 @@ class OwnerTest < ActionDispatch::IntegrationTest
     location = locations(:location1)
     get_via_redirect delete_location_path(location), { controller: :locations, action: :delete_location }
     assert_template 'html/show_user'
-    assert_equal 'Location deleted', flash[:success]
+    assert_equal Messages::InfoMessages::LocationDeleted, flash[:success]
   end
 end

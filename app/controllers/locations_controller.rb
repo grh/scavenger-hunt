@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
     if @location.create(location_params, @current_user)
       redirect_to show_location_path(@location)
     else
-      flash[:danger] = 'Unable to create location'
+      flash[:danger] = Messages::ErrorMessages::UnableToCreateLocation
       render 'new_location_form'
     end
   end
@@ -14,16 +14,16 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
 
     if @location.update(location_params)
-      flash[:success] = 'Location updated successfully'
+      flash[:success] = Messages::InfoMessages::LocationUpdatedSuccessfully
       redirect_to show_location_path(@location)
     else
-      flash[:danger] = 'Location not updated'
+      flash[:danger] = Messages::ErrorMessages::LocationNotUpdated
       redirect_to edit_location_form_path(@location)
     end
   end
 
   def delete_location
-    Location.destroy(params[:id]) ? flash[:success] = 'Location deleted' : flash[:danger] = 'Unable to delete location'
+    Location.destroy(params[:id]) ? flash[:success] = Messages::InfoMessages::LocationDeleted : flash[:danger] = Messages::ErrorMessages::UnableToDeleteLocation
 
     if @current_user.admin?
       redirect_to show_all_locations_path

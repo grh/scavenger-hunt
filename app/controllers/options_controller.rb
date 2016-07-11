@@ -3,10 +3,10 @@ class OptionsController < ApplicationController
     if Option.create(option_params)
       # clear cache so CSS will recompile with new option
       `rake tmp:cache:clear`
-      flash[:success] = 'Options saved!'
+      flash[:success] = Messages::InfoMessages::OptionsSaved
       redirect_to show_user_path(@current_user)
     else
-      flash[:danger] = 'Options not saved!'
+      flash[:danger] = Messages::ErrorMessages::OptionsNotSaved
       redirect_to new_option_form_path
     end
   end
@@ -14,10 +14,10 @@ class OptionsController < ApplicationController
   def update_option
     @option = Option.last
     if @option.update(option_params)
-      flash[:success] = 'Options saved!'
+      flash[:success] = Messages::InfoMessages::OptionsSaved
       redirect_to show_user_path(@current_user)
     else
-      flash[:danger] = 'Options not saved!'
+      flash[:danger] = Messages::ErrorMessages::OptionsNotSaved
       redirect_to new_option_form_path
     end
   end
