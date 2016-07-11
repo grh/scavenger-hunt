@@ -43,10 +43,10 @@ owner:
   owned_events: event2
   owned_locations: location1, location2
 
-#admin:
-#  first_name: admin
-#  last_name: admin
-#  email: a@a.com
-#  password_hash: <%= password_hash %>
-#  password_salt: <%= password_salt %>
-#  roles: participant, owner, admin
+admin:
+  first_name: admin
+  last_name: admin
+  email: a@a.com
+  password_hash: <%= password_hash %>
+  password_salt: <%= password_salt %>
+  roles: participant, owner, admin

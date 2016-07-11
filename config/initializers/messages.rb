@@ -21,7 +21,6 @@ module Messages
     UnableToDeleteLocation = 'Unable to delete location'
     EventNotCreated = 'Event not created'
     EventNotUpdated = 'Event not updated'
-    UnableToDeleteEvent = 'Unable to delete event'
   end
   
   class InfoMessages
