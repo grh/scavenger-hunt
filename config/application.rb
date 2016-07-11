@@ -38,7 +38,8 @@ module ScavengerHunt
 = CONTRIBUTORS
 
     Thank you to the following individuals for their contributions:
-
+    
+    * Megan Freeman
     * Reiley Porter
     * Carmon Wong
     * Beverly Wood
@@ -69,6 +70,30 @@ module ScavengerHunt
     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+=end
+
+=begin
+= USER
+    
+    CREATE AN ACCOUNT
+        
+    On the homepage, click "signup".  Enter your information and click "submit".  Once your account is created, you will be redirected to your homepage (Dashboard).
+    
+    
+    JOIN AN EVENT
+    
+    When logged in, go to the main Homepage.  This will display a list of the active events.  Select an event to join.  Go to your Dashboard to confirm you have joined the event.
+    
+    
+    VISIT LOCATIONS
+    
+    Visit each event location.  When you arrive at a given location, scan the available QR code.  When prompted, input your credentials to check in are mark the location as "visited".    
+    
+    
+    VIEW YOUR DASHBOARD
+    
+    When logged in, click "Dashboard".  This page displays all events you are participating in, event you own, and items you own.  To view your account details, click on the dropdown tab labelled with your email address.  This will display your account details.  Input any information you wish to update.
 
 =end
 end
