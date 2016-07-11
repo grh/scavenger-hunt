@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         redirect_to params[:redirect_to]
       end
     else
-      flash.now[:danger] = 'Invalid email or password'
+      flash.now[:danger] = Messages::ErrorMessages::InvalidEmailOrPassword
       render 'html/login_form'
     end
   end

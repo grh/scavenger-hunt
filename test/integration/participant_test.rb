@@ -14,7 +14,7 @@ class ParticipantTest < ActionDispatch::IntegrationTest
     # try to access owner's account
     get_via_redirect show_user_path(users(:owner)), { controller: :html, action: :show_user }
     assert_template 'html/show_user'
-    assert_equal 'You are not authorized to access that page!', flash[:danger]
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
   end
 
   test 'participant cannot create account' do
@@ -24,7 +24,7 @@ class ParticipantTest < ActionDispatch::IntegrationTest
     get_via_redirect signup_form_path, { controller: :html, action: :new_user_form }
     # verify that we weren't able to view the new user form
     assert_template 'html/show_user'
-    assert_equal 'You are not authorized to access that page!', flash[:danger]
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
   end
 
   test 'participant can view event' do
@@ -119,7 +119,7 @@ class ParticipantTest < ActionDispatch::IntegrationTest
         }
     }
     assert_template 'html/show_user'
-    assert_equal 'Account updated successfully', flash[:success]
+    assert_equal Messages::InfoMessages::AccountUpdatedSuccessfully, flash[:success]
   end
 
   test 'participant cannot edit other accounts' do
@@ -129,7 +129,7 @@ class ParticipantTest < ActionDispatch::IntegrationTest
     # try to edit owner's account
     get_via_redirect edit_user_form_path(users(:owner)), { controller: :html, action: :edit_user_form }
     assert_template 'html/show_user'
-    assert_equal 'You are not authorized to access that page!', flash[:danger]
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
   end
 
   test 'participant can logout' do

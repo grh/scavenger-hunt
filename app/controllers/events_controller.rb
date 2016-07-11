@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     if @event.save?(params[:locations], @current_user)
       redirect_to show_event_path(@event)
     else
-      flash[:danger] = 'Event not created'
+      flash[:danger] = Messages::ErrorMessages::EventNotCreated
       redirect_to new_event_form_path
     end
   end
@@ -14,16 +14,16 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update?(event_params, params[:locations])
-      flash[:success] = 'Event updated successfully'
+      flash[:success] = Messages::InfoMessages::EventUpdatedSuccessfully
       redirect_to show_event_path(@event)
     else
-      flash[:danger] = 'Event not updated'
+      flash[:danger] = Messages::ErrorMessages::EventNotUpdated
       redirect_to edit_event_form_path(@event)
     end
   end
 
   def delete_event
-    Event.destroy(params[:id]) ? flash[:success] = 'Event deleted' : flash[:danger] = 'Unable to delete event'
+    Event.destroy(params[:id]) ? flash[:success] = Messages::InfoMessages::EventDeleted : flash[:danger] = Messages::ErrorMessages::UnableToDeleteEvent
     if @current_user.admin?
       redirect_to show_all_events_path
     else
