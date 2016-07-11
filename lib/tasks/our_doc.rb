@@ -39,7 +39,7 @@ module OurDoc
                   when '' # skip blank lines
                     next
                   when '= ' # h3 tags
-                    comment.content << { h3: line.split[1] }
+                    comment.content << { h3: line.split[1..-1].join(' ') }
                   when '* ' # ul and li tags
                     li = []
                     while line[0..1] == '* '
