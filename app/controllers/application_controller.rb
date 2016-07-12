@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
         when /\/event\/[0-9]+/, /\/join\/[0-9]+/, /\/visit\/\w+/
           flash[:danger] = Messages::ErrorMessages::MustBeLoggedIn
           redirect_to login_form_path(redirect_to: request.path)
-        when /\/user\/([0-9]+)/
+        when (/\/user\/([0-9]+)/ and not @current_user.guest?)
           flash[:danger] = Messages::ErrorMessages::UnauthorizedAccess
           redirect_to show_user_path(@current_user)
         else

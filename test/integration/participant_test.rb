@@ -28,14 +28,12 @@ class ParticipantTest < ActionDispatch::IntegrationTest
   end
 
   test 'participant can view event' do
-    # click on 'view event' as guest
-    event = events(:event2)
-    get_via_redirect show_event_path(event), { controller: :html, action: :show_event }
-    assert_template 'html/login_form'
-
     # login as participant
-    # verify redirected to event
-    user = login(:participant, show_event_path(event))
+    user = login(:participant, show_user_path(users(:participant)))
+
+    # view event
+    event = events(:event1)
+    get_via_redirect show_event_path(event), { controller: :html, action: :show_event }
     assert_template 'html/show_event'
   end
 
