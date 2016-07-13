@@ -38,14 +38,11 @@ class ParticipantTest < ActionDispatch::IntegrationTest
   end
 
   test 'participant can join event' do
-    # try to join as guest
-    event = events(:event2)
-    get_via_redirect join_event_path(event), { controller: :users, action: :join_event }
-    assert_template 'html/login_form'
-
     # login as participant
     # verify joined event
-    user = login(:participant, join_event_path(event))
+    user = login(:participant)
+    event = events(:event2)
+    get_via_redirect join_event_path(event), { controller: :users, action: :join_event }
     assert_template 'html/show_user'
     assert user.participating_events.include? event
   end

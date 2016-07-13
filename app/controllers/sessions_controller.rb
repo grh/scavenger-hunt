@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @user = User.authenticate(user_params)
     if @user
       login(@user)
-      if params[:redirect_to].empty?
+      if params[:redirect_to].nil?
         redirect_to show_user_path(@user)
       else
         redirect_to params[:redirect_to]
