@@ -1,4 +1,13 @@
 class Event < ActiveRecord::Base
+=begin
+= DEVELOPER
+
+= EVENT MODEL
+
+  The Event model contains the associations described in the E-R diagram.
+
+=end
+
   # event/user associations
   has_and_belongs_to_many :owner, class_name: 'User', join_table: 'owned_events'
   has_many :joins

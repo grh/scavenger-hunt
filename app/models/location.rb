@@ -1,4 +1,14 @@
 class Location < ActiveRecord::Base
+=begin
+= DEVELOPER
+
+= LOCATION MODEL
+
+  The location class contains all the associations described previously; additionally, the model class defines an instance
+  method that generates a QR code for the location using the rQRCode Rubygem.
+
+=end
+
   # location/user associations
   has_and_belongs_to_many :owner, class_name: 'User', join_table: 'owned_locations'
   has_many :visits
