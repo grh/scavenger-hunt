@@ -1,4 +1,17 @@
 class HtmlController < ApplicationController
+=begin
+= DEVELOPER
+
+= HTML CONTROLLER
+
+  The HtmlController contains all the actions that are intended to render actual HTML. This is a departure from the normal
+  separation of concerns encountered in a Rails app, but the administrators found this organization to be just as useful.
+
+  If an action is intended to render HTML, then it should be included in this controller. For example, the new_user_form action
+  renders an HTML form to create a new account. The actual creation of the user object and persistence to the database
+  is handled via the normal user controller.
+
+=end
   
   skip_before_action :install, only: :new_user_form
   ##################

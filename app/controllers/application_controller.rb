@@ -1,4 +1,21 @@
 class ApplicationController < ActionController::Base
+=begin
+= DEVELOPER
+
+= APPLICATION CONTROLLER
+
+  The parent controller is <code>application_controller.rb</code>. ApplicationController
+  includes four filters that run prior to any controller action:
+
+  * <b>install</b>: Checks that there is at least one site administrator and runs the install script if not
+  * <b>current_user</b>: Retrieves the current user
+  * <b>current_task</b>: Retrieves the current task that has been requested
+  * <b>authorize</b>: Checks if the current user is authorized for the current task
+
+  Additionally, ApplicationController contains the login/logout methods for the app.
+
+=end
+
   APP_NAME = 'Scavenger Hunt'
 
   protect_from_forgery with: :exception

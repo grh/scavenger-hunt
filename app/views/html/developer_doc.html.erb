@@ -7,7 +7,172 @@
 </div>
 <div class="row">
 <div class="col-md-9 col-centered">
-<h3>Introduction</h3>
+<h3>Development process</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The development process for this project is relatively straightforward. The main development code is housed as a repository on Bitbucket.org as part of the UNLV Scavenger Hunt team. To begin coding on this project, do the following: </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<ul>
+<li>fork the UNLV Scavenger Hunt repository into your own account</li>
+<li>clone the repository from your own account into your development environment</li>
+<li>change to the main app directory and run <code>./start-developing.sh</code>.</li>
+<li>start working!</li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>After completing your code and verifying that all tests pass, make sure to add, commit, and push your changes to your Bitbucket.org account. Then, create a pull request to merge your changes from your account into the UNLV Scavenger Hunt repository. The project administrators will review your changes and either merge or decline your pull request. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Entity diagram</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p><img src="/images/ERdiagram.png" style="display: block; margin: auto; border: thin solid;"> </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The E-R diagram above describes the relationships between the various models. The core models for this app consist of events, locations, and users, and they are related to one another as follows: </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>An event contains a series of 0 or more locations, and each location can belong to 0 or more events. This is facilitated through the use of a Rails has-and-belongs-to-many association. </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>A user can own many events, and each event belongs to 1 or more users. This is accomplished through a Rails has-and-belongs-to-many association. A user can also participate in many events, and an event contains 0 or more participants. This happens through the use of a Rails has-many/through association reflected in the Join model. </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>A user can also own many locations, and each location belongs to 1 or more users. As before, this is a Rails has-and-belongs-to-many association. A user can also check-in at many locations, and a location can have 0 or more visitors. This relationship uses the Visit model to implement a Rails has-many/through association. </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>Users can have 1 or more roles; each role is comprised of 1 or more permissions, and each permission contains 1 or more tasks. A task is simply a triplet consisting of an HTTP request method, a controller, and an action. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Html controller</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The HtmlController contains all the actions that are intended to render actual HTML. This is a departure from the normal separation of concerns encountered in a Rails app, but the administrators found this organization to be just as useful. </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>If an action is intended to render HTML, then it should be included in this controller. For example, the new_user_form action renders an HTML form to create a new account. The actual creation of the user object and persistence to the database is handled via the normal user controller. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Application controller</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The parent controller is <code>application_controller.rb</code>. ApplicationController includes four filters that run prior to any controller action: </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<ul>
+<li><b>install</b>: Checks that there is at least one site administrator and runs the install script if not</li>
+<li><b>current_user</b>: Retrieves the current user</li>
+<li><b>current_task</b>: Retrieves the current task that has been requested</li>
+<li><b>authorize</b>: Checks if the current user is authorized for the current task</li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>Additionally, ApplicationController contains the login/logout methods for the app. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Role model</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>Users can have 1 or more roles; the roles defined for the app are: </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<ul>
+<li>Guest</li>
+<li>Participant</li>
+<li>Owner</li>
+<li>Admin</li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>Each role is comprised of 1 or more permissions, and each permission contains 1 or more tasks. If the current user is not logged in, the default role of Guest is assigned. Otherwise, the appropriate role for that user is retrieved. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Location model</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The location class contains all the associations described previously; additionally, the model class defines an instance method that generates a QR code for the location using the rQRCode Rubygem. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>Event model</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The Event model contains the associations described in the E-R diagram. </p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-centered">
+<h3>User model</h3>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The user model contains the associations stated above and shown in the E-R diagram. Additionally, the user model contains the following validations: </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<ul>
+<li>presence of first name, last name, email, and password</li>
+<li>uniqueness of email</li>
+<li>email format</li>
+<li>password and password confirmation</li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="col-md-11 col-md-offset-2 col-centered" style="padding-top:1em;">
+<p>The user model contains dynamically created methods for retrieving and determining roles that are injected at runtime using Ruby's <code>define_method</code> and <code>define_singleton_method</code>. </p>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -1,4 +1,22 @@
 class User < ActiveRecord::Base
+=begin
+= DEVELOPER
+
+= USER MODEL
+
+  The user model contains the associations stated above and shown in the E-R diagram. Additionally, the user model contains
+  the following validations:
+
+  * presence of first name, last name, email, and password
+  * uniqueness of email
+  * email format
+  * password and password confirmation
+
+  The user model contains dynamically created methods for retrieving and determining roles that are injected at runtime using
+  Ruby's <code>define_method</code> and <code>define_singleton_method</code>.
+
+=end
+
   attr_accessor :password
   before_save :encrypt_password
 
