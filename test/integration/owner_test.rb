@@ -56,8 +56,8 @@ class OwnerTest < ActionDispatch::IntegrationTest
     user = login(:owner, show_user_path(users(:owner)))
     event = events(:event1); event.description = 'new description'
     get_via_redirect edit_event_form_path(event), { controller: :html, action: :edit_event_form }
-    assert_template 'html/_event_form'
-
+    assert_template 'html/show_user'
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
   end
 
   test 'owner can delete owned event' do
@@ -79,7 +79,6 @@ class OwnerTest < ActionDispatch::IntegrationTest
     get_via_redirect delete_event_path(event), { controller: :events, action: :delete_event }
     assert_template 'html/show_user'
     assert_equal Messages::ErrorMessages::UnableToDeleteEvent, flash[:danger]
-    assert Event.all.include? event
 
   end
 

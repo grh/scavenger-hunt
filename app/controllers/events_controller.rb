@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
   def update_event
     @event = Event.find(params[:id])
-
+    
     if @event.update?(event_params, params[:locations])
       flash[:success] = Messages::InfoMessages::EventUpdatedSuccessfully
       redirect_to show_event_path(@event)
