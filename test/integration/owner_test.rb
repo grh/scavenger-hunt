@@ -51,6 +51,12 @@ class OwnerTest < ActionDispatch::IntegrationTest
   end
 
   test 'owner cannot edit events not owned' do
+    # login as owner and
+    # click on 'edit event' link of event NOT owned
+    user = login(:owner, show_user_path(users(:owner)))
+    event = events(:event1); event.description = 'new description'
+    get_via_redirect edit_event_form_path(event), { controller: :html, action: :edit_event_form }
+    assert_template 'html/_event_form'
 
   end
 
@@ -66,6 +72,14 @@ class OwnerTest < ActionDispatch::IntegrationTest
   end
 
   test 'owner cannot delete events not owned' do
+    # login as owner and
+    # click on 'delete event' link to event NOT owned
+    user = login(:owner, show_user_path(users(:owner)))
+    event = events(:event1)
+    get_via_redirect delete_event_path(event), { controller: :events, action: :delete_event }
+    assert_template 'html/show_user'
+    assert_equal Messages::ErrorMessages::UnableToDeleteEvent, flash[:danger]
+    assert Event.all.include? event
 
   end
 
@@ -101,7 +115,13 @@ class OwnerTest < ActionDispatch::IntegrationTest
   end
 
   test 'owner cannot view locations not owned' do
-
+    # login as owner
+    user = login(:owner, show_user_path(users(:owner)))
+    # click on 'view location' link to location NOT owned
+    location = locations(:location3)
+    get_via_redirect show_location_path(location), { controller: :html, action: :show_location }
+    assert_template 'html/show_user'
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
   end
 
   test 'owner can edit owned location' do
@@ -128,7 +148,14 @@ class OwnerTest < ActionDispatch::IntegrationTest
   end
 
   test 'owner cannot edit locations not owned' do
-
+    # login as owner and
+    # click on 'edit location' link to location NOT owned
+    user = login(:owner, show_user_path(users(:owner)))
+    location = locations(:location3)
+    get_via_redirect edit_location_form_path(location), { controller: :html, action: :edit_location_form }
+    assert_template 'html/show_user'
+    assert_equal Messages::ErrorMessages::UnauthorizedAccess, flash[:danger]
+    
   end
 
   test 'owner can delete owned location' do
@@ -142,6 +169,13 @@ class OwnerTest < ActionDispatch::IntegrationTest
   end
 
   test 'owner cannot deleted locations not owned' do
+    # login as owner and
+    # click on 'delete location' link to location NOT owned
+    user = login(:owner, show_user_path(users(:owner)))
+    location = locations(:location3)
+    get_via_redirect delete_location_path(location), { controller: :locations, action: :delete_location }
+    assert_template 'html/show_user'
+    assert_equal Messages::ErrorMessages::UnableToDeleteLocation, flash[:danger]
 
   end
 end

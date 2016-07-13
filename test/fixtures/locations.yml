@@ -13,3 +13,10 @@ location2:
   tag: def456
   events: event2
   owner: owner
+
+location3:
+  name: location 3
+  description: location 3
+  coordinates: 36.107148, -115.14226
+  tag: abc123
+  events: event2

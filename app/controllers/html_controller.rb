@@ -65,11 +65,21 @@ class HtmlController < ApplicationController
   end
 
   def show_location
+    
     @location = Location.find(params[:id])
+    unless @location.owner.include? @current_user or @current_user.admin?
+      flash[:danger] = Messages::ErrorMessages::UnauthorizedAccess
+      redirect_to show_user_path(@current_user)
+    end
   end
 
   def edit_location_form
+    
     @location = Location.find(params[:id])
+    unless @location.owner.include? @current_user or @current_user.admin?
+      flash[:danger] = Messages::ErrorMessages::UnauthorizedAccess
+      redirect_to show_user_path(@current_user)
+    end
   end
 
   #################
