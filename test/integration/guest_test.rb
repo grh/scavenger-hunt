@@ -39,8 +39,9 @@ class GuestTest < ActionDispatch::IntegrationTest
     assert_template 'html/home'
     
     # join event
-
-    
+    event = events(:event1)
+    get_via_redirect join_event_path(event), { controller: :user, action: :join_event_path }
+    assert_template 'html/login_form'
 
     # show all events
     get_via_redirect show_all_events_path, { controller: :html, action: :show_all_events_path }
@@ -58,7 +59,6 @@ class GuestTest < ActionDispatch::IntegrationTest
     event = events(:event1)
     get_via_redirect edit_event_form_path(event), { controller: :html, action: :edit_event_form_path }
     assert_template 'html/login_form'
-    
     
     # edit location
     location = locations(:location1)
