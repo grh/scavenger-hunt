@@ -23,7 +23,17 @@ class LocationsController < ApplicationController
   end
 
   def delete_location
-    Location.destroy(params[:id]) ? flash[:success] = Messages::InfoMessages::LocationDeleted : flash[:danger] = Messages::ErrorMessages::UnableToDeleteLocation
+    @location = Location.find(params[:id])
+    
+    if @location.owner.include? @current_user or @current_user.admin? 
+      if Location.destroy(@location) 
+        flash[:success] = Messages::InfoMessages::LocationDeleted 
+      else
+        flash[:danger] = Messages::ErrorMessages::UnableToDeleteLocation
+      end
+    else
+      flash[:danger] = Messages::ErrorMessages::UnableToDeleteLocation
+    end
 
     if @current_user.admin?
       redirect_to show_all_locations_path

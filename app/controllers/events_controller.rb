@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
   def update_event
     @event = Event.find(params[:id])
-
+    
     if @event.update?(event_params, params[:locations])
       flash[:success] = Messages::InfoMessages::EventUpdatedSuccessfully
       redirect_to show_event_path(@event)
@@ -23,7 +23,19 @@ class EventsController < ApplicationController
   end
 
   def delete_event
-    Event.destroy(params[:id]) ? flash[:success] = Messages::InfoMessages::EventDeleted : flash[:danger] = Messages::ErrorMessages::UnableToDeleteEvent
+    @event = Event.find(params[:id])
+  
+    
+    if @event.owner.include? @current_user or @current_user.admin? 
+      if Event.destroy(@event) 
+        flash[:success] = Messages::InfoMessages::EventDeleted 
+      else
+        flash[:danger] = Messages::ErrorMessages::UnableToDeleteEvent
+      end
+    else
+      flash[:danger] = Messages::ErrorMessages::UnableToDeleteEvent
+    end
+    
     if @current_user.admin?
       redirect_to show_all_events_path
     else
