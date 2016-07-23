@@ -1,7 +1,6 @@
 #!/bin/bash
 
 bundle install --deployment --without development test
-bundle update --deployment --without development test
 bundle exec rake \
     db:drop \
     db:migrate \
