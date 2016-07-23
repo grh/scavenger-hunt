@@ -17,3 +17,10 @@ server, simply change into the app main directory and perform these steps:
 That's it! When you first visit the web site, you'll be asked to create
 an initial admin account and select some options. After that, it's off
 to the races!
+
+## Contribute
+
+Development for this project is done via a private Bitbucket repository.
+If you are interested in contributing in any way to this app, please
+email the project director, Guymon Hall, at `g u y m o n . h a l l @ g m
+a i l . c o m`
