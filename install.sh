@@ -6,6 +6,6 @@ bundle exec rake \
     db:drop \
     db:migrate \
     db:fixtures:load FIXTURES=roles,permissions,tasks,options \
-    rake db:seed \
+    db:seed \
     assets:precompile \
     RAILS_ENV=production
