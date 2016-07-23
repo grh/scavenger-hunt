@@ -111,11 +111,11 @@ class HtmlController < ApplicationController
   end
 
   def show_all_users
-    @users = User.all
+    @users = User.where.not(first_name: 'guest')
   end
 
   def new_option_form
-    @option = Option.new
+    @option = Option.any? ? Option.last : Option.new
   end
 
   def edit_option_form

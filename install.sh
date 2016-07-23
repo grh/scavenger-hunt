@@ -1,7 +1,11 @@
 #!/bin/bash
 
-bundle install
-bundle update
-rake db:drop
-rake db:migrate
-rake db:fixtures:load FIXTURES=roles,permissions,tasks
+bundle install --deployment --without development test
+bundle update --deployment --without development test
+bundle exec rake \
+    db:drop \
+    db:migrate \
+    db:fixtures:load FIXTURES=roles,permissions,tasks,options \
+    rake db:seed \
+    assets:precompile \
+    RAILS_ENV=production

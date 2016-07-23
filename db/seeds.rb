@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# create guest user
+guest = User.new(
+        first_name: 'guest',
+        last_name: 'guest'
+)
+guest.save(validate:false)
+guest.roles << Role.find_by_name('guest')
